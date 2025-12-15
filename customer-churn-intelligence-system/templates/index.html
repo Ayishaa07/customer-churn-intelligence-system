@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Churn Intelligence System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="frame">
+
+    <!-- TOP BAR -->
+    <header class="top">
+        <div class="title">
+            <h1>Customer Churn Intelligence</h1>
+            <span>Executive decision support system</span>
+        </div>
+        <div class="mode">Live Analysis</div>
+    </header>
+
+    <!-- EXECUTIVE SUMMARY -->
+    {% if prediction %}
+    <section class="summary {{ prediction_class }}">
+        <div class="summary-main">
+            <span class="summary-label">Decision</span>
+            <h2>{{ prediction }}</h2>
+
+            <div class="action-box">
+                <span class="action-label">Recommended Action</span>
+                <p>{{ action }}</p>
+            </div>
+        </div>
+
+        <div class="summary-metrics">
+            <div class="metric">
+                <span>Prediction Confidence</span>
+                <strong>{{ confidence }}%</strong>
+            </div>
+            <div class="trust">
+                Based on historical usage and complaint patterns
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+
+        <!-- INPUT SIGNALS -->
+        <section class="signals">
+            <h2>Input Signals Considered</h2>
+
+            <form method="POST">
+
+                <!-- Usage Hours -->
+                <div class="signal">
+                    <label for="usage_hours">Usage Hours (Daily Average)</label>
+                    <input
+                        type="number"
+                        id="usage_hours"
+                        name="usage_hours"
+                        placeholder="e.g. 6"
+                        required
+                    >
+                    <small>Typical range: 1–10 hours</small>
+                </div>
+
+                <!-- Complaints -->
+                <div class="signal">
+                    <label for="complaints">Customer Complaints (Last 30 Days)</label>
+                    <input
+                        type="number"
+                        id="complaints"
+                        name="complaints"
+                        placeholder="e.g. 2"
+                        required
+                    >
+                    <small>0–1 is normal, 3+ indicates risk</small>
+                </div>
+
+                <button type="submit">Generate Decision</button>
+            </form>
+        </section>
+
+        <!-- DECISION DETAILS -->
+        <section class="decision">
+            <h2>Why this decision was made</h2>
+
+            {% if prediction %}
+            <p class="explanation">
+                {{ explanation }}
+            </p>
+            {% else %}
+            <p class="empty">
+                Enter customer signals to generate an executive summary.
+            </p>
+            {% endif %}
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>
