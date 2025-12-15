@@ -1,14 +1,12 @@
 # customer-churn-intelligence-system
 A simple machine learning project using Logistic Regression and Flask to classify customer churn risk.
+
 Overview
-
 This project uses a Logistic Regression model to classify customer churn risk and a Flask web app to interact with the trained model.
-
 The focus of this project is learning the end-to-end flow:
 data → model → web interface.
 
 Tech Stack
-
 Python
 Logistic Regression (scikit-learn)
 Flask
